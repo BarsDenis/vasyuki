@@ -1,0 +1,47 @@
+@use "../base/mixins" as mix;
+@use "../base/variables" as var;
+
+.swiper-button {
+    position: static;
+    width: 44px;
+    height: 44px;
+    background-color: var.$black;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    flex-shrink: 0;
+    @include mix.transition;
+    &:after {
+        color: var.$white;
+        font-size: 17px;
+    }
+    @media (hover: hover) {
+        &:hover {
+            background-color: var.$yellow;
+        }
+    }
+    &-disabled {
+        background-color: var.$lightgray;
+    }
+}
+
+.swiper-pagination {
+    position: static;
+    width: auto;
+    &-bullet {
+        &-active {
+            background-color: var.$black;
+        }
+    }
+}
+
+.stages__slider {
+    .swiper-pagination {
+        @include mix.bup(md) {
+            display: none;
+        }
+    }
+}
+

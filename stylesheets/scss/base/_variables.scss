@@ -1,0 +1,33 @@
+// colors
+$base: #313131;
+$black: #1f1f1f;
+$white: #ffffff;
+$red: #f54932;
+$yellow: #fbce51;
+$gray: #d6d6d6;
+$lightgray: #d0d0d0;
+$blue: #3057a2;
+$beige: #e9ded4;
+
+// fonts
+$golos: "Golos Text", sans-serif;
+$merri: "Merriweather", serif;
+
+// container
+$box: 1262px;
+
+// base font size
+$bfs: 20px;
+
+//breakpoints
+$breakpoints: (
+    "ls": 2200px,
+    "hd": 1921px,
+    "hg": 1600px,
+    "lg": 1440px,
+    "nm": 1366px,
+    "md": 1024px,
+    "sm": 768px,
+    "xs": 480px,
+    "xxs": 385px,
+) !default;

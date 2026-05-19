@@ -1,0 +1,602 @@
+@use "../base/mixins" as mix;
+@use "../base/variables" as var;
+
+.hero {
+    position: relative;
+    background-image: url(../../img/hero-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    max-height: 933px;
+    padding: 26px 0;
+    &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image: url(../../img/hero-img-hd.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: bottom;
+        @include mix.bdown(hd) {
+            background-size: cover;
+        }
+        @include mix.bdown(nm) {
+            background-image: url(../../img/hero-img-nm.png);
+        }
+        @include mix.bdown(sm) {
+            background-image: url(../../img/hero-img-xs.png);
+            background-size: contain;
+        }
+    }
+    .container {
+        z-index: 1;
+    }
+    &__logo {
+        padding-bottom: 62px;
+        @include mix.bdown(sm) {
+            padding-bottom: 40px;
+        }
+    }
+    &__animation {
+        @include mix.bdown(nm) {
+            display: none;
+        }
+    }
+    &__horse {
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+        right: calc((100% - #{var.$box}) / 2 + 150px);
+        height: 278px;
+        animation: horse-move 5s ease-in-out 1s forwards;
+    }
+    &__chess {
+        position: absolute;
+        z-index: 1;
+        bottom: 21px;
+        height: 122px;
+        animation: chess-move 3s linear 6s forwards;
+        right: calc((100% - #{var.$box}) / 2 - 180px);
+        @include mix.bdown(ls) {
+             right: calc((100% - #{var.$box}) / 3 - 0px);
+        }
+        @include mix.bdown(hd) {
+            right: calc((100% - #{var.$box}) / 2 - 180px);
+        }
+        @media (max-width: 1750px) {
+            right: calc((100% - #{var.$box}) / 2 - 25px);
+        }
+    }
+    &__wrapper {
+        max-width: 542px;
+        @include mix.bdown(sm) {
+            margin: auto;
+        }
+    }
+    &__title {
+        margin-bottom: 24px;
+        span {
+            display: block;
+
+            &:nth-child(1) {
+                text-align: left;
+            }
+            &:nth-child(2) {
+                text-align: left;
+            }
+            &:nth-child(3) {
+                text-align: center;
+            }
+            &:nth-child(4) {
+                text-align: right;
+            }
+        }
+    }
+    &__text {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 40px;
+        @include mix.bdown(sm) {
+            margin-bottom: 32px;
+        }
+    }
+    &__buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 16px;
+        @include mix.bdown(sm) {
+            flex-direction: column;
+            row-gap: 14px;
+        }
+    }
+}
+
+@keyframes horse-move {
+    0% {
+        transform: translate(0, 0);
+    }
+    45% {
+        transform: translate(-325px, 0);
+    }
+    55% {
+        transform: translate(-325px, 0);
+    }
+    100% {
+        height: 180px;
+        transform: translate(-342px, -22px);
+    }
+}
+
+@keyframes chess-move {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-255px, 0);
+    }
+}
+
+.marquee {
+    overflow: hidden;
+    background-color: var.$red;
+    padding: mix.rem(18) 0;
+    font-family: var.$merri;
+    font-size: mix.rem(20);
+    @include mix.bdown(sm) {
+        padding: mix.rem(10) 0;
+        font-size: mix.rem(16);
+    }
+
+    &__track {
+        display: flex;
+        animation: marquee 20s linear infinite;
+        gap: mix.rem(12);
+    }
+
+    &__list {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        gap: mix.rem(12);
+
+        li {
+            white-space: nowrap;
+            color: var.$white;
+
+            text-transform: uppercase;
+
+            &::after {
+                content: "•";
+                margin-left: mix.rem(12);
+            }
+        }
+    }
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.support {
+    margin-top: 80px;
+    @include mix.bdown(md) {
+        margin-top: 64px;
+    }
+    @include mix.bdown(xs) {
+        margin-top: 48px;
+    }
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        column-gap: 2.4rem;
+
+        @include mix.bdown(md) {
+            grid-template-columns: 1fr;
+            row-gap: 24px;
+            max-width: 650px;
+            margin: auto;
+        }
+    }
+
+    &__title-first {
+        grid-column: 1;
+        grid-row: 1;
+        align-self: end;
+        @include mix.bdown(md) {
+            grid-column: auto;
+            grid-row: auto;
+            align-self: auto;
+            order: 1;
+        }
+    }
+
+    &__title-second {
+        grid-column: 1;
+        grid-row: 2;
+        align-self: start;
+
+        @include mix.bdown(md) {
+            grid-column: auto;
+            grid-row: auto;
+            align-self: auto;
+            order: 3;
+        }
+    }
+
+    &__image {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        width: 394px;
+
+        @include mix.bdown(md) {
+            grid-column: auto;
+            grid-row: auto;
+            order: 2;
+            margin: 0 auto;
+        }
+        @include mix.bdown(xs) {
+            width: 100%;
+        }
+
+        img {
+            width: 100%;
+            object-fit: cover;
+            clip-path: ellipse(50% 50% at 50% 50%);
+        }
+    }
+}
+
+.schedule {
+    margin-top: 17px;
+    margin-bottom: 200px;
+    @include mix.bdown(md) {
+        margin-bottom: 120px;
+    }
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        column-gap: 17px;
+        @include mix.bdown(md) {
+            flex-direction: column;
+            row-gap: 24px;
+            align-items: center;
+        }
+    }
+    &__info {
+        max-width: 57.65%;
+        flex-basis: 57.65%;
+        @include mix.bdown(md) {
+            max-width: 100%;
+            flex-basis: auto;
+        }
+        &-header {
+            padding-top: 47px;
+            margin-bottom: 60px;
+            @include mix.bdown(md) {
+                padding-top: 0;
+                margin-bottom: 44px;
+            }
+        }
+        &-board {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border-bottom: 2px solid var.$lightgray;
+            &:not(:has(~ .schedule__info-board)) {
+                border-bottom: none;
+                margin-bottom: 48px;
+                @include mix.bdown(sm) {
+                    margin-bottom: 40px;
+                }
+            }
+            @include mix.bdown(sm) {
+                display: block;
+            }
+
+            &-type {
+                color: rgba($color: var.$base, $alpha: 0.7);
+                border-right: 2px solid var.$lightgray;
+                padding: 0 16px 16px 0;
+                @include mix.bdown(sm) {
+                    padding-bottom: 12px;
+                    padding-top: 0;
+                    border-right: none;
+                }
+            }
+
+            &-result {
+                font-weight: 600;
+                padding: 0 0 16px 16px;
+                display: flex;
+                align-items: center;
+                column-gap: 12px;
+                p:first-child:not(:only-child) {
+                    text-decoration: line-through;
+                    text-decoration-color: var.$red;
+                }
+                @include mix.bdown(sm) {
+                    padding-left: 0;
+                }
+            }
+
+            & + & {
+                .schedule__info-board-type,
+                .schedule__info-board-result {
+                    padding-top: 16px;
+                }
+                .schedule__info-board-result {
+                    @include mix.bdown(sm) {
+                        padding-top: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.stages {
+    margin-bottom: 200px;
+    @include mix.bdown(md) {
+        margin-bottom: 120px;
+    }
+    &__header {
+        margin-bottom: 64px;
+
+        @include mix.bdown(md) {
+            margin-bottom: 20px;
+        }
+    }
+
+    &__header-row {
+        display: flex;
+        align-items: center;
+        column-gap: 40px;
+        @include mix.bdown(md) {
+            display: block;
+            margin-bottom: 20px;
+        }
+        p {
+            max-width: 280px;
+            @include mix.bdown(md) {
+                max-width: 100%;
+                margin-top: 12px;
+            }
+        }
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+
+        @include mix.bdown(md) {
+            display: flex;
+            gap: 0;
+        }
+    }
+    &__slider {
+        @include mix.bdown(md) {
+            padding-top: 128px;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: -45px;
+            width: 389px;
+            height: 228px;
+            background-image: url(../../img/plane.png);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: bottom right;
+            pointer-events: none;
+            z-index: 2;
+            @include mix.bdown(nm) {
+                right: -20px;
+            }
+            @include mix.bdown(md) {
+                width: 335px;
+                height: 182px;
+                bottom: auto;
+                top: 0;
+                right: 50%;
+                transform: translateX(50%);
+            }
+        }
+        @include mix.bup(md) {
+            overflow: visible;
+
+            .swiper-wrapper {
+                display: grid !important;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+                transform: none !important;
+            }
+
+            .swiper-slide {
+                display: contents;
+            }
+        }
+        &-navigation {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 16px;
+            user-select: none;
+            max-width: fit-content;
+            margin: auto;
+            margin-top: 28px;
+        }
+
+        .swiper-button {
+            @include mix.bup(md) {
+                display: none;
+            }
+        }
+    }
+
+    &__slide {
+        @include mix.bdown(md) {
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            padding: 48px 6px 20px 6px;
+            background-image: url(../../img/hero-bg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+    }
+
+    &__item {
+        background-image: url(../../img/hero-bg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: 20px;
+        display: flex;
+        column-gap: 16px;
+        .stages__slide:nth-child(2) & {
+            grid-row: 1 / 3;
+            grid-column: 3 / 4;
+        }
+        .stages__slide:nth-child(5) & {
+            grid-column: 2 / 4;
+            padding-right: 323px;
+            @include mix.bdown(nm) {
+                padding-right: 340px;
+            }
+            @include mix.bdown(md) {
+                padding-right: 20px;
+            }
+        }
+        @include mix.bdown(md) {
+            padding: 14px;
+            background: none;
+        }
+    }
+
+    &__num {
+        font-weight: 600;
+        background-color: var.$white;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    &__info {
+        max-width: 415px;
+        font-weight: 500;
+        @include mix.bdown(sm) {
+            font-size: 18px;
+        }
+    }
+}
+
+.participants {
+    margin-bottom: 140px;
+    @include mix.bdown(sm) {
+        margin-bottom: 100px;
+    }
+    &__header {
+        margin-bottom: 60px;
+        @include mix.bdown(sm) {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__slider {
+        position: static;
+        &-navigation {
+            position: absolute;
+            top: 11px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            column-gap: 14px;
+            user-select: none;
+            @include mix.bdown(md) {
+                position: static;
+                max-width: fit-content;
+                margin: auto;
+                margin-top: 40px;
+            }
+        }
+    }
+    &__pagination {
+        min-width: 50px;
+    }
+    &__slide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 37px;
+        text-align: center;
+        height: auto;
+        @include mix.bdown(xs) {
+            padding: 0 12px;
+        }
+    }
+    &__image {
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        max-width: 320px;
+        max-height: 320px;
+        width: 100%;
+        height: 100%;
+        margin-bottom: 28px;
+        flex-shrink: 0;
+        @include mix.bdown(sm) {
+            max-width: 244px;
+            max-height: 244px;
+        }
+        &::before {
+            content: "";
+            background-image: url(../../img/participant-bg.png);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+        img {
+            padding-top: 21px;
+        }
+    }
+    &__name {
+        font-weight: 600;
+        font-size: 24px;
+        margin-bottom: 6px;
+    }
+    &__rank {
+        color: rgba($color: var.$base, $alpha: 0.6);
+        margin-bottom: 20px;
+    }
+    &__link {
+        margin: auto;
+    }
+    &__btn {
+        flex-grow: 1;
+        display: flex;
+        align-items: flex-end;
+    }
+}

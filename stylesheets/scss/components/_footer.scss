@@ -1,0 +1,15 @@
+@use "../base/mixins" as mix;
+@use "../base/variables" as var;
+
+.footer {
+    background-color: var.$beige;
+    padding-top: 40px;
+    padding-bottom: 72px;
+    @include mix.bdown(sm) {
+        padding-bottom: 60px;
+    }
+    &__text {
+        color: rgba($color: var.$base, $alpha: 0.6);
+        font-size: 16px;
+    }
+}

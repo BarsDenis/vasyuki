@@ -1,0 +1,11 @@
+// Base
+@use "base/fonts";
+@use "base/reset";
+@use "base/variables";
+@use "base/mixins";
+@use "base/global";
+
+// Components
+@use "components/sliders";
+@use "components/blocks";
+@use "components/footer";

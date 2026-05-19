@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "sass:math";
+@use "variables" as var;
+
+
+@mixin bdown($bp, $bps:var.$breakpoints) {
+    @media screen and (max-width: (map.get($bps, $bp) - 1px)) {
+        @content;
+    }
+}
+@mixin bup($bp, $bps:var.$breakpoints) {
+    @media screen and (min-width: map.get($bps, $bp)) {
+        @content;
+    }
+}
+
+@mixin transition {
+    transition: all .3s ease-in-out;
+}
+
+@function em($px, $base: var.$bfs) {
+    @return #{math.div($px, math.div($base, 1px))}em;
+}
+
+@function rem($px, $base: 20) {
+    @return #{math.div($px, $base)}rem;
+}
+
